@@ -46,6 +46,12 @@
             align-items: center;
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
         .brand-title {
             font-family: var(--font-serif);
             font-size: 1.4rem;
@@ -62,6 +68,39 @@
             border: 1px solid var(--accent-gold);
             padding: 0.4rem 0.9rem;
             border-radius: 50px;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            padding: 2px 4px;
+            transition: color 0.3s ease;
+        }
+
+        .lang-btn.active {
+            color: var(--text-main);
+            font-weight: 600;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        .lang-btn:hover {
+            color: var(--text-main);
         }
 
         /* Central Content */
@@ -166,6 +205,11 @@
             body {
                 padding: 2rem 5%;
             }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
             footer {
                 flex-direction: column;
                 align-items: flex-start;
@@ -178,20 +222,27 @@
     <!-- Header -->
     <header>
         <div class="brand-title">SEMIN CACHO</div>
-        <div class="status-badge">Website Under Curation</div>
+        <div class="header-right">
+            <div class="status-badge" id="badge-text">Website Under Curation</div>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+                <span>|</span>
+                <button class="lang-btn" id="btn-es" onclick="setLanguage('es')">ES</button>
+            </div>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main>
-        <span class="academic-tag">Contemporary Visual Arts & Concept Studies</span>
-        <h1>Semin Cacho, Ph.D.</h1>
-        <p class="statement">
+        <span class="academic-tag" id="academic-tag">Contemporary Visual Arts & Concept Studies</span>
+        <h1 id="title-text">Semin Cacho, Ph.D.</h1>
+        <p class="statement" id="statement-text">
             The studio digital space is currently undergoing a comprehensive portfolio update. Dr. Semin Cacho’s fine art practice explores subconscious narratives, materiality, painting, sculpture, and interdisciplinary visual forms.
         </p>
 
         <div class="cta-container">
-            <a href="mailto:seminsinemay@gmail.com" class="btn btn-primary">Inquire / Email Studio</a>
-            <a href="https://api.whatsapp.com/send?phone=905532967309" target="_blank" rel="noopener noreferrer" class="btn btn-outline">WhatsApp Direct</a>
+            <a href="mailto:seminsinemay@gmail.com" class="btn btn-primary" id="btn-email">Inquire / Email Studio</a>
+            <a href="https://api.whatsapp.com/send?phone=905532967309" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="btn-whatsapp">WhatsApp Direct</a>
         </div>
     </main>
 
@@ -201,8 +252,44 @@
             <a href="https://www.instagram.com/cachosemin" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="https://www.youtube.com/@seminsinemay" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
-        <p class="copyright">&copy; 2026 Semin Cacho, Ph.D. All Rights Reserved.</p>
+        <p class="copyright" id="copyright-text">&copy; 2026 Semin Cacho, Ph.D. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        const translations = {
+            en: {
+                badge: "Website Under Curation",
+                academic: "Contemporary Visual Arts & Concept Studies",
+                title: "Semin Cacho, Ph.D.",
+                statement: "The studio digital space is currently undergoing a comprehensive portfolio update. Dr. Semin Cacho’s fine art practice explores subconscious narratives, materiality, painting, sculpture, and interdisciplinary visual forms.",
+                email: "Inquire / Email Studio",
+                whatsapp: "WhatsApp Direct",
+                copyright: "© 2026 Semin Cacho, Ph.D. All Rights Reserved."
+            },
+            es: {
+                badge: "Sitio en Curaduría",
+                academic: "Artes Visuales Contemporáneas y Estudios Conceptuales",
+                title: "Dra. Semin Cacho",
+                statement: "El espacio digital del estudio se encuentra actualmente en proceso de actualización de portafolio. La práctica artística de la Dra. Semin Cacho explora las narrativas del subconsciente, la materialidad, la pintura, la escultura y las formas visuales interdisciplinarias.",
+                email: "Consultas / Correo del Estudio",
+                whatsapp: "WhatsApp Directo",
+                copyright: "© 2026 Dra. Semin Cacho. Todos los derechos reservados."
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('badge-text').textContent = translations[lang].badge;
+            document.getElementById('academic-tag').textContent = translations[lang].academic;
+            document.getElementById('title-text').textContent = translations[lang].title;
+            document.getElementById('statement-text').textContent = translations[lang].statement;
+            document.getElementById('btn-email').textContent = translations[lang].email;
+            document.getElementById('btn-whatsapp').textContent = translations[lang].whatsapp;
+            document.getElementById('copyright-text').textContent = translations[lang].copyright;
+
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+        }
+    </script>
 
 </body>
 </html>
