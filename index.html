@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semin Cacho, Ph.D. | Contemporary Art Studio</title>
-    <meta name="description" content="Official website of Semin Cacho, Ph.D. Contemporary fine arts, paintings, sculptures, and mixed media.">
+    <meta name="description" content="Official website of Dr. Semin Cacho. Contemporary visual arts, academic research, and interdisciplinary concepts.">
     
-    <!-- Google Fonts Originales -->
+    <!-- Google Fonts: Editorial Serif & Clean Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-color: #f7f6f2;
+            --text-main: #181818;
+            --text-muted: #686763;
+            --accent-gold: #a38f6d;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,169 +28,178 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            color: #1a1a1a;
-            background-color: #f7f5f2;
-            line-height: 1.6;
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding: 3rem 6%;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header / Brand */
+        header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 3rem 1.5rem;
-            text-align: center;
         }
 
-        .header {
-            margin-top: 1rem;
-        }
-
-        .logo-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 400;
+        .brand-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
             letter-spacing: 4px;
+            font-weight: 600;
             text-transform: uppercase;
-            color: #000;
-            margin-bottom: 0.3rem;
         }
 
-        .logo-sub {
+        .status-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+        }
+
+        /* Central Content */
+        main {
+            max-width: 800px;
+            margin: 4rem 0;
+        }
+
+        .academic-tag {
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #666;
+            color: var(--text-muted);
             display: block;
-        }
-
-        .main-hero {
-            max-width: 650px;
-            margin: 2.5rem 0;
-        }
-
-        .hero-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #777;
-            margin-bottom: 1rem;
-            display: inline-block;
-            border-bottom: 1px solid #1a1a1a;
-            padding-bottom: 4px;
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 400;
-            line-height: 1.3;
             margin-bottom: 1.2rem;
-            color: #111;
         }
 
-        .hero-desc {
-            font-size: 0.95rem;
-            color: #555;
+        h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .statement {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.8;
             font-weight: 300;
-            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 680px;
         }
 
-        .actions {
+        /* Direct Studio Actions */
+        .cta-container {
             display: flex;
             gap: 1.2rem;
-            justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2.2rem;
         }
 
-        .btn-primary, .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.8rem 2rem;
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
             text-decoration: none;
+            font-size: 0.78rem;
             text-transform: uppercase;
-            font-size: 0.8rem;
             letter-spacing: 2px;
             transition: all 0.3s ease;
         }
 
         .btn-primary {
-            background: #000;
-            color: #fff;
-            border: 1px solid #000;
+            background: var(--text-main);
+            color: #ffffff;
         }
 
         .btn-primary:hover {
-            background: #333;
-            border-color: #333;
+            background: #333333;
         }
 
-        .btn-secondary {
-            border: 1px solid #000;
-            color: #000;
-            background: transparent;
+        .btn-outline {
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
         }
 
-        .btn-secondary:hover {
-            background: #000;
-            color: #fff;
+        .btn-outline:hover {
+            background: var(--text-main);
+            color: #ffffff;
         }
 
-        .footer {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links {
+        /* Footer */
+        footer {
             display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-bottom: 1.2rem;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: #555;
+        .social-links a {
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: color 0.3s ease;
+            margin-right: 1.8rem;
+            transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            color: #000;
+        .social-links a:hover {
+            color: var(--text-main);
         }
 
         .copyright {
             font-size: 0.75rem;
-            color: #888;
+            color: #999;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 2rem 5%;
+            }
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <h1 class="logo-title">SEMIN CACHO</h1>
-        <span class="logo-sub">Ph.D. in Art & Design</span>
+    <!-- Header -->
+    <header>
+        <div class="brand-title">SEMIN CACHO</div>
+        <div class="status-badge">Website Under Curation</div>
     </header>
 
-    <main class="main-hero">
-        <span class="hero-tag">Under Curation</span>
-        <h2 class="hero-title">"A new digital gallery space is currently being curated."</h2>
-        <p class="hero-desc">
-            The updated portfolio featuring selected paintings, sculptures, objects, and interdisciplinary visual research will be available shortly.
+    <!-- Main Content -->
+    <main>
+        <span class="academic-tag">Contemporary Visual Arts & Concept Studies</span>
+        <h1>Semin Cacho, Ph.D.</h1>
+        <p class="statement">
+            The studio digital space is currently undergoing a comprehensive portfolio update. Dr. Semin Cacho’s fine art practice explores subconscious narratives, materiality, painting, sculpture, and interdisciplinary visual forms.
         </p>
 
-        <div class="actions">
-            <a href="mailto:seminsinemay@gmail.com" class="btn-primary">Direct Studio Inquiry</a>
-            <a href="https://api.whatsapp.com/send?phone=905532967309" target="_blank" rel="noopener" class="btn-secondary">WhatsApp</a>
+        <div class="cta-container">
+            <a href="mailto:seminsinemay@gmail.com" class="btn btn-primary">Inquire / Email Studio</a>
+            <a href="https://api.whatsapp.com/send?phone=905532967309" target="_blank" rel="noopener noreferrer" class="btn btn-outline">WhatsApp Direct</a>
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://www.instagram.com/cachosemin" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.youtube.com/@seminsinemay" target="_blank" rel="noopener">YouTube</a>
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/cachosemin" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.youtube.com/@seminsinemay" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
         <p class="copyright">&copy; 2026 Semin Cacho, Ph.D. All Rights Reserved.</p>
     </footer>
