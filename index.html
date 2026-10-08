@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semin Cacho, Ph.D. | Contemporary Visual Art Studio</title>
-    <meta name="description" content="Official website of Dr. Semin Cacho. Contemporary fine arts, academic research, paintings, and interdisciplinary visual concepts. Website currently under curated update.">
+    <title>Semin Cacho, Ph.D. | Contemporary Art Studio</title>
+    <meta name="description" content="Official website of Dr. Semin Cacho. Contemporary visual arts, academic research, and interdisciplinary concepts.">
     
-    <!-- Google Fonts: Editorial Serif & Clean Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #f7f6f2;
-            --text-main: #181818;
-            --text-muted: #686763;
+            --bg-color: #f8f7f4;
+            --text-main: #1a1a1a;
+            --text-muted: #66645f;
             --accent-gold: #a38f6d;
             --font-serif: 'Playfair Display', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -35,79 +34,80 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 3rem 6%;
+            align-items: center;
+            padding: 4rem 2rem;
+            text-align: center;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Header / Brand */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header {
+            margin-top: 1rem;
         }
 
-        .brand-title {
+        .brand-name {
             font-family: var(--font-serif);
-            font-size: 1.4rem;
-            letter-spacing: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-badge {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            color: var(--accent-gold);
-            border: 1px solid var(--accent-gold);
-            padding: 0.4rem 0.9rem;
-            border-radius: 50px;
-        }
-
-        /* Central Content */
-        main {
-            max-width: 800px;
-            margin: 4rem 0;
-        }
-
-        .academic-tag {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 1.2rem;
-        }
-
-        h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            letter-spacing: 5px;
             font-weight: 400;
-            line-height: 1.2;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-degree {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .main-content {
+            max-width: 650px;
+            margin: 3rem 0;
+        }
+
+        .status-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 4px;
+        }
+
+        .curation-quote {
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+            font-style: italic;
+            line-height: 1.4;
+            color: #2c2c2c;
             margin-bottom: 1.5rem;
         }
 
-        .statement {
-            font-size: 1.15rem;
+        .curation-sub {
+            font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.8;
             font-weight: 300;
-            margin-bottom: 2.5rem;
-            max-width: 680px;
+            line-height: 1.6;
         }
 
-        /* Direct Studio Actions */
-        .cta-container {
+        .actions {
             display: flex;
             gap: 1.2rem;
+            justify-content: center;
             flex-wrap: wrap;
+            margin-top: 2.5rem;
         }
 
         .btn {
-            display: inline-block;
-            padding: 0.9rem 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 2rem;
             text-decoration: none;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
@@ -116,6 +116,7 @@
         .btn-primary {
             background: var(--text-main);
             color: #ffffff;
+            border: 1px solid var(--text-main);
         }
 
         .btn-primary:hover {
@@ -132,74 +133,62 @@
             color: #ffffff;
         }
 
-        /* Footer */
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            padding-top: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+        .footer {
+            margin-bottom: 1rem;
         }
 
-        .social-links a {
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
             font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-right: 1.8rem;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
-        .social-links a:hover {
+        .footer-links a:hover {
             color: var(--text-main);
         }
 
         .copyright {
             font-size: 0.75rem;
-            color: #999;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 2rem 5%;
-            }
-            footer {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            color: #a09e99;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="brand-title">SEMIN CACHO</div>
-        <div class="status-badge">Website Under Curation</div>
+    <header class="header">
+        <h1 class="brand-name">SEMIN CACHO</h1>
+        <span class="brand-degree">Ph.D. in Art & Design</span>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <span class="academic-tag">Contemporary Visual Arts & Concept Studies</span>
-        <h1>Semin Cacho, Ph.D.</h1>
-        <p class="statement">
-            The studio digital space is currently undergoing a comprehensive portfolio update. Dr. Semin Cacho’s fine art practice explores subconscious narratives, materiality, painting, sculpture, and interdisciplinary visual forms.
+    <main class="main-content">
+        <span class="status-tag">Under Curation</span>
+        <blockquote class="curation-quote">
+            "A new digital gallery space is currently being curated."
+        </blockquote>
+        <p class="curation-sub">
+            The updated portfolio featuring selected paintings, sculptures, objects, and interdisciplinary visual research will be available shortly.
         </p>
 
-        <div class="cta-container">
-            <a href="mailto:info@semincacho.com" class="btn btn-primary">Inquire / Email Studio</a>
-            <a href="https://wa.me/" target="_blank" class="btn btn-outline">WhatsApp Direct</a>
+        <div class="actions">
+            <a href="mailto:seminsinemay@gmail.com" class="btn btn-primary">Direct Studio Inquiry</a>
+            <a href="https://wa.me/905532967309" target="_blank" rel="noopener noreferrer" class="btn btn-outline">WhatsApp</a>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://www.instagram.com/" target="_blank">Instagram</a>
-            <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://www.instagram.com/cachosemin/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.youtube.com/@seminsinemay" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
         <p class="copyright">&copy; 2026 Semin Cacho, Ph.D. All Rights Reserved.</p>
     </footer>
