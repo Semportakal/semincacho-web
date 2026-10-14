@@ -455,7 +455,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.92);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -465,18 +465,19 @@
         .lightbox-content {
             background: #fff;
             display: flex;
-            max-width: 950px;
+            max-width: 1050px;
             width: 100%;
-            max-height: 85vh;
+            max-height: 88vh;
             overflow: hidden;
             position: relative;
+            border-radius: 4px;
         }
 
         /* Slider Container en Lightbox */
         .lightbox-slider-wrap {
             position: relative;
-            width: 50%;
-            background: #111;
+            width: 55%;
+            background: #0d0d0d;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -484,11 +485,21 @@
         }
 
         .lightbox-slider-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             display: block;
-            transition: opacity 0.3s ease;
+            transform-origin: center center;
+            transition: transform 0.3s ease-out, opacity 0.3s ease;
+            cursor: zoom-in;
+            cursor: -webkit-zoom-in;
+        }
+
+        .lightbox-slider-wrap img.zoomed {
+            cursor: zoom-out;
+            cursor: -webkit-zoom-out;
         }
 
         /* Controles Slider */
@@ -496,14 +507,14 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             color: #fff;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -513,25 +524,25 @@
         }
 
         .slider-nav:hover {
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
         }
 
-        .slider-prev { left: 10px; }
-        .slider-next { right: 10px; }
+        .slider-prev { left: 12px; }
+        .slider-next { right: 12px; }
 
         .slider-dots {
             position: absolute;
-            bottom: 12px;
+            bottom: 14px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 6px;
+            gap: 8px;
             z-index: 5;
         }
 
         .slider-dot {
-            width: 8px;
-            height: 8px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
             background: rgba(255,255,255,0.4);
             cursor: pointer;
@@ -547,7 +558,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            width: 50%;
+            width: 45%;
             overflow-y: auto;
         }
 
@@ -587,45 +598,26 @@
         .lightbox-close {
             position: absolute;
             top: 1rem;
-            right: 1.5rem;
-            color: #333;
-            font-size: 2.2rem;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        /* Footer */
-        .footer {
+            right: 1.2rem;
+            color: #fff;
+            background: rgba(0,0,0,0.6);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 2.5rem 5%;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            flex-wrap: wrap;
-            gap: 1rem;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: background 0.3s;
         }
 
-        .footer-brand {
-            font-family: var(--font-serif);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+        .lightbox-close:hover {
+            background: rgba(0,0,0,0.9);
         }
 
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-right: 1.5rem;
-        }
-
-        .copyright {
-            font-size: 0.75rem;
-            color: #999;
-        }
-
-        /* Mobile Responsive */
+        /* Mobile Optimization */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -640,38 +632,34 @@
                 grid-template-columns: 1fr;
             }
             .lightbox {
-                padding: 1rem;
+                padding: 0;
             }
             .lightbox-content {
                 flex-direction: column;
-                max-height: 90vh;
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
                 overflow-y: auto;
             }
             .lightbox-slider-wrap {
                 width: 100%;
-                height: 45vh;
+                height: 60vh;
+                min-height: 60vh;
+                background: #000;
             }
             .lightbox-slider-wrap img {
+                max-height: 58vh;
                 object-fit: contain;
             }
             .lightbox-details {
                 width: 100%;
-                padding: 1.5rem;
+                padding: 1.8rem 1.5rem 2.5rem;
+                background: #fff;
                 overflow-y: visible;
-                justify-content: flex-start;
             }
             .lightbox-close {
-                top: 0.5rem;
-                right: 1rem;
-                color: #fff;
-                background: rgba(0,0,0,0.5);
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                line-height: 1;
+                top: 0.8rem;
+                right: 0.8rem;
             }
         }
     </style>
@@ -906,7 +894,7 @@
                     title: "Kutsama (Bendición)",
                     tech: "Óleo sobre lienzo (Tela de algodón americano montada por su padre en 2004, intervenida)",
                     dim: "94 × 94.6 cm — Antalya, 2015",
-                    desc: "Expresa gratitud, protección, oración y bendición hacia la existencia, el tiempo presente y el universo. El lienzo fue preparado en 2004 por el recordado padre de la artista. La obra fue repintada sobre una capa anterior. Obra enmarcada que ha formado parte de importantes exposiciones colectivas, su exposición de fin de maestría y exposiciones en Eskişehir y el Aeropuerto de Antalya."
+                    desc: "Expresa gratitud, protección, oración y bendición hacia la existencia, el tiempo presente y el universo. El lienzo fue prepared en 2004 por el recordado padre de la artista. La obra fue repintada sobre una capa anterior. Obra enmarcada que ha formado parte de importantes exposiciones colectivas, su exposición de fin de maestría y exposiciones en Eskişehir y el Aeropuerto de Antalya."
                 },
                 en: {
                     title: "Kutsama (Blessing)",
@@ -1045,10 +1033,18 @@
             localStorage.setItem('preferred_lang', lang);
         }
 
+        function resetZoom() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.classList.remove('zoomed');
+            lightboxImg.style.transformOrigin = 'center center';
+            lightboxImg.style.transform = 'none';
+        }
+
         function updateSliderImage() {
             const lightboxImg = document.getElementById('lightbox-img');
             const dotsContainer = document.getElementById('slider-dots');
             
+            resetZoom();
             lightboxImg.src = currentImages[currentImageIndex];
 
             // Actualizar puntos de navegación
@@ -1085,6 +1081,7 @@
 
             // Lightbox Modal Logic
             const lightbox = document.getElementById('art-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
             const lightboxTitle = document.getElementById('lightbox-title');
             const lightboxMedium = document.getElementById('lightbox-medium');
             const lightboxSize = document.getElementById('lightbox-size');
@@ -1095,6 +1092,23 @@
             const prevBtn = document.querySelector('.slider-prev');
             const nextBtn = document.querySelector('.slider-next');
             const dotsContainer = document.getElementById('slider-dots');
+
+            // Interactive Point-Targeted Zoom (Zoom exacto donde se hace clic/tap)
+            lightboxImg.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                if (lightboxImg.classList.contains('zoomed')) {
+                    resetZoom();
+                } else {
+                    const rect = lightboxImg.getBoundingClientRect();
+                    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+                    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+
+                    lightboxImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                    lightboxImg.style.transform = 'scale(2.5)';
+                    lightboxImg.classList.add('zoomed');
+                }
+            });
 
             cards.forEach(card => {
                 card.addEventListener('click', () => {
@@ -1156,11 +1170,13 @@
             });
 
             lightboxClose.addEventListener('click', () => {
+                resetZoom();
                 lightbox.style.display = 'none';
             });
 
             lightbox.addEventListener('click', (e) => {
                 if (e.target === lightbox) {
+                    resetZoom();
                     lightbox.style.display = 'none';
                 }
             });
