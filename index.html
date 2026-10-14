@@ -481,7 +481,7 @@
             padding: 2.5rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             width: 50%;
             overflow-y: auto;
         }
@@ -574,15 +574,38 @@
             .editorial-grid {
                 grid-template-columns: 1fr;
             }
+            .lightbox {
+                padding: 1rem;
+            }
             .lightbox-content {
                 flex-direction: column;
+                max-height: 90vh;
                 overflow-y: auto;
             }
-            .lightbox-content img, .lightbox-details {
-                width: 100%;
-            }
             .lightbox-content img {
-                max-height: 300px;
+                width: 100%;
+                max-height: 45vh;
+                object-fit: contain;
+                background: #111;
+            }
+            .lightbox-details {
+                width: 100%;
+                padding: 1.5rem;
+                overflow-y: visible;
+                justify-content: flex-start;
+            }
+            .lightbox-close {
+                top: 0.5rem;
+                right: 1rem;
+                color: #fff;
+                background: rgba(0,0,0,0.5);
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
             }
         }
     </style>
@@ -700,7 +723,6 @@
         <div class="editorial-grid">
             <div class="editorial-media">
                 <div class="portrait-frame">
-                    <!-- Cambiado a perfil.jpg -->
                     <img src="perfil.jpg" alt="Semin Cacho, Ph.D.">
                 </div>
             </div>
@@ -756,7 +778,7 @@
     <footer class="footer">
         <div class="footer-brand">SEMIN CACHO ART STUDIO</div>
         <div class="footer-links">
-            <a href="https://www.instagram.com/semincacho" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.instagram.com/cachosemin" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="https://www.youtube.com/@seminsinemay" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
         <p class="copyright" data-i18n="copyright_text">&copy; 2026 Dra. Semin Cacho. Todos los derechos reservados.</p>
@@ -817,9 +839,9 @@
                 },
                 en: {
                     title: "Kutsama (Blessing)",
-                    tech: "Oil on canvas (American cotton cloth stretched by her late father in 2004, overpainted)",
+                    tech: "Oil on canvas (American cotton cloth stretched by her late father in 2004, overprinted)",
                     dim: "94 × 94.6 cm — Antalya, 2015",
-                    desc: "Embodies gratitude, protection, prayer, and blessing for existence, lived time, and the universe. The canvas was stretched in 2004 by the artist's late father. Overpainted over an earlier composition. Framed artwork featured in group exhibitions, Master's degree graduation exhibition, and Antalya Airport Art Gallery."
+                    desc: "Embodies gratitude, protection, prayer, and blessing for existence, lived time, and the universe. The canvas was stretched in 2004 by the artist's late father. Overprinted over an earlier composition. Framed artwork featured in group exhibitions, Master's degree graduation exhibition, and Antalya Airport Art Gallery."
                 },
                 tr: {
                     title: "Kutsama",
