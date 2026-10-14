@@ -472,9 +472,74 @@
             position: relative;
         }
 
-        .lightbox-content img {
+        /* Slider Container en Lightbox */
+        .lightbox-slider-wrap {
+            position: relative;
             width: 50%;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .lightbox-slider-wrap img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Controles Slider */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 5;
+            user-select: none;
+        }
+
+        .slider-nav:hover {
+            background: rgba(0,0,0,0.85);
+        }
+
+        .slider-prev { left: 10px; }
+        .slider-next { right: 10px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 5;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dot.active {
+            background: #fff;
         }
 
         .lightbox-details {
@@ -582,11 +647,12 @@
                 max-height: 90vh;
                 overflow-y: auto;
             }
-            .lightbox-content img {
+            .lightbox-slider-wrap {
                 width: 100%;
-                max-height: 45vh;
+                height: 45vh;
+            }
+            .lightbox-slider-wrap img {
                 object-fit: contain;
-                background: #111;
             }
             .lightbox-details {
                 width: 100%;
@@ -759,11 +825,16 @@
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
+    <!-- Lightbox Modal con Slider -->
     <div id="art-lightbox" class="lightbox">
         <div class="lightbox-content">
             <span class="lightbox-close">&times;</span>
-            <img id="lightbox-img" src="" alt="Artwork detail">
+            <div class="lightbox-slider-wrap">
+                <button class="slider-nav slider-prev">&#10094;</button>
+                <img id="lightbox-img" src="" alt="Artwork detail">
+                <button class="slider-nav slider-next">&#10095;</button>
+                <div class="slider-dots" id="slider-dots"></div>
+            </div>
             <div class="lightbox-details">
                 <h3 id="lightbox-title">Título de la Obra</h3>
                 <p id="lightbox-medium" class="meta-tech">Técnica</p>
@@ -784,11 +855,11 @@
         <p class="copyright" data-i18n="copyright_text">&copy; 2026 Dra. Semin Cacho. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Interactive Multilingual Engine Script -->
+    <!-- Interactive Multilingual Engine Script con Carrusel Integrado -->
     <script>
         const artworkData = {
             art1: {
-                img: "art1.jpg",
+                images: ["art1.jpg", "foto1.jpg"],
                 es: {
                     title: "Parçalı Haller (Estados Fragmentados)",
                     tech: "Técnica mixta sobre lienzo (Grabado en xilografía, Bristol, marcador, acrílico, óleo y collage)",
@@ -809,7 +880,7 @@
                 }
             },
             art3: {
-                img: "art3.jpg",
+                images: ["art3.jpg", "foto3.jpg"],
                 es: {
                     title: "Love",
                     tech: "Técnica mixta sobre lienzo (Collage, pintura en aerosol, acrílico, óleo y carboncillo/füzen)",
@@ -830,7 +901,7 @@
                 }
             },
             art4: {
-                img: "art4.jpg",
+                images: ["art4.jpg", "foto2.jpg"],
                 es: {
                     title: "Kutsama (Bendición)",
                     tech: "Óleo sobre lienzo (Tela de algodón americano montada por su padre en 2004, intervenida)",
@@ -929,7 +1000,7 @@
                 filter_drawings: "Kağıt Üzerine Çalışmalar",
                 view_artwork: "Detayı Gör",
                 badge_artist: "Sanatçı ve Araştırmacı",
-                artist_name_about: "Semin Cacho, Ph.D.",
+                artist_name_about: "Sanatçı Hakkında",
                 bio_text: "Sanat ve Tasarım alanında doktora (Ph.D.) derecesine sahip görsel sanatçı. Çalışmaları resim, üç boyutlu objeler ve deneysel medyayı kapsamakta; maddesellik, bilinçaltı kavramlar ve disiplinlerarası görsel diyaloglara odaklanmaktadır.",
                 cv_phd: "Sanat ve Tasarım Doktora — Görsel formlar ve disiplinlerarası metodolojiler üzerine akademik araştırma.",
                 cv_exhibits_label: "Sergiler",
@@ -943,6 +1014,8 @@
         };
 
         let currentLang = 'es';
+        let currentImages = [];
+        let currentImageIndex = 0;
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -972,6 +1045,19 @@
             localStorage.setItem('preferred_lang', lang);
         }
 
+        function updateSliderImage() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const dotsContainer = document.getElementById('slider-dots');
+            
+            lightboxImg.src = currentImages[currentImageIndex];
+
+            // Actualizar puntos de navegación
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentImageIndex);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferred_lang') || 'es';
             setLanguage(savedLang);
@@ -999,13 +1085,16 @@
 
             // Lightbox Modal Logic
             const lightbox = document.getElementById('art-lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
             const lightboxTitle = document.getElementById('lightbox-title');
             const lightboxMedium = document.getElementById('lightbox-medium');
             const lightboxSize = document.getElementById('lightbox-size');
             const lightboxDesc = document.getElementById('lightbox-desc');
             const lightboxInquire = document.getElementById('lightbox-inquire');
             const lightboxClose = document.querySelector('.lightbox-close');
+
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            const dotsContainer = document.getElementById('slider-dots');
 
             cards.forEach(card => {
                 card.addEventListener('click', () => {
@@ -1014,7 +1103,9 @@
                         const item = artworkData[artId];
                         const langData = item[currentLang];
 
-                        lightboxImg.src = item.img;
+                        currentImages = item.images || [item.img];
+                        currentImageIndex = 0;
+
                         lightboxTitle.textContent = langData.title;
                         lightboxMedium.textContent = langData.tech;
                         lightboxSize.textContent = langData.dim;
@@ -1022,9 +1113,46 @@
 
                         lightboxInquire.href = `https://api.whatsapp.com/send?phone=905532967309&text=Hola,%20me%20interesa%20consultar%20sobre%20la%20obra:%20${encodeURIComponent(langData.title)}`;
 
+                        // Configurar botones del slider
+                        if (currentImages.length > 1) {
+                            prevBtn.style.display = 'flex';
+                            nextBtn.style.display = 'flex';
+                            dotsContainer.style.display = 'flex';
+
+                            dotsContainer.innerHTML = '';
+                            currentImages.forEach((_, idx) => {
+                                const dot = document.createElement('div');
+                                dot.classList.add('slider-dot');
+                                if (idx === 0) dot.classList.add('active');
+                                dot.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    currentImageIndex = idx;
+                                    updateSliderImage();
+                                });
+                                dotsContainer.appendChild(dot);
+                            });
+                        } else {
+                            prevBtn.style.display = 'none';
+                            nextBtn.style.display = 'none';
+                            dotsContainer.style.display = 'none';
+                        }
+
+                        updateSliderImage();
                         lightbox.style.display = 'flex';
                     }
                 });
+            });
+
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+                updateSliderImage();
+            });
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+                updateSliderImage();
             });
 
             lightboxClose.addEventListener('click', () => {
