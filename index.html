@@ -38,6 +38,9 @@
             color: var(--text-dark);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header & Navbar */
@@ -86,17 +89,19 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 4px;
         }
 
-        .nav-links a:hover, .nav-links a.active-link {
+        .nav-links a:hover, .nav-links a.active-tab {
             color: var(--text-dark);
+            background: rgba(0,0,0,0.04);
         }
 
         .nav-highlight {
             border-bottom: 1px solid var(--text-dark);
-            padding-bottom: 2px;
             color: var(--text-dark) !important;
         }
 
@@ -129,10 +134,23 @@
             border-bottom: 1px solid var(--text-dark);
         }
 
-        /* Hero */
+        /* Sistema de secciones ocultas (Vista limpia unificada Desktop/Móvil) */
+        .tab-section {
+            display: none !important;
+            flex-grow: 1;
+        }
+
+        .tab-section.section-visible {
+            display: block !important;
+        }
+
+        .hero.section-visible {
+            display: flex !important;
+        }
+
+        /* Hero (Portada) */
         .hero {
-            min-height: 80vh;
-            display: flex;
+            min-height: 75vh;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -188,11 +206,15 @@
             60% { transform: translateY(-3px); }
         }
 
-        /* Quote Banner */
+        /* Quote Banner (Manifiesto) */
         .quote-banner {
             background: var(--bg-editorial);
-            padding: 5rem 10%;
+            padding: 6rem 10%;
             text-align: center;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .quote-symbol {
@@ -222,7 +244,7 @@
 
         /* Section Common */
         .section {
-            padding: 6rem 5%;
+            padding: 5rem 5%;
         }
 
         .section-header {
@@ -397,6 +419,10 @@
             text-align: center;
             background: #181818;
             color: #fff;
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .inquiry-box {
@@ -628,6 +654,7 @@
             border-top: 1px solid rgba(0,0,0,0.08);
             flex-wrap: wrap;
             gap: 1.5rem;
+            margin-top: auto;
         }
 
         .footer-brand {
@@ -660,7 +687,7 @@
             width: 100%;
         }
 
-        /* Mobile Exclusive Clean View (App-Style) */
+        /* Responsive Mobile Adjustments */
         @media (max-width: 768px) {
             .navbar {
                 position: sticky;
@@ -683,11 +710,6 @@
                 border-radius: 4px;
             }
 
-            .nav-links a.active-tab {
-                background: var(--text-dark);
-                color: #fff !important;
-            }
-
             .lang-switch {
                 margin-left: 0;
                 border-left: none;
@@ -695,19 +717,9 @@
                 margin-top: 0.2rem;
             }
 
-            /* Ocultar todas las secciones dinámicamente en móvil excepto la activa */
-            .tab-section {
-                display: none !important;
-            }
-
-            .tab-section.mobile-visible {
-                display: block !important;
-            }
-
             .hero {
                 min-height: 70vh;
                 padding: 3rem 5%;
-                justify-content: center;
             }
 
             .section {
@@ -781,13 +793,13 @@
     <!-- Header / Navigation -->
     <header class="navbar">
         <div class="logo">
-            <a onclick="showMobileSection('home')"><span class="brand-title">SEMIN CACHO</span> <span class="brand-sub">ART STUDIO</span></a>
+            <a onclick="showSection('home')"><span class="brand-title">SEMIN CACHO</span> <span class="brand-sub">ART STUDIO</span></a>
         </div>
         <nav class="nav-links">
-            <a onclick="showMobileSection('exhibition')" class="nav-btn" data-tab="exhibition" data-i18n="nav_exhibits">Obras</a>
-            <a onclick="showMobileSection('statement')" class="nav-btn" data-tab="statement" data-i18n="nav_statement">Manifiesto</a>
-            <a onclick="showMobileSection('about')" class="nav-btn" data-tab="about" data-i18n="nav_about">Sobre la Artista</a>
-            <a onclick="showMobileSection('inquire')" class="nav-btn nav-highlight" data-tab="inquire" data-i18n="nav_inquire">Contacto</a>
+            <a onclick="showSection('exhibition')" class="nav-btn" data-tab="exhibition" data-i18n="nav_exhibits">Obras</a>
+            <a onclick="showSection('statement')" class="nav-btn" data-tab="statement" data-i18n="nav_statement">Manifiesto</a>
+            <a onclick="showSection('about')" class="nav-btn" data-tab="about" data-i18n="nav_about">Sobre la Artista</a>
+            <a onclick="showSection('inquire')" class="nav-btn nav-highlight" data-tab="inquire" data-i18n="nav_inquire">Contacto</a>
             
             <!-- Selector de Idioma TRILINGÜE -->
             <div class="lang-switch">
@@ -801,12 +813,12 @@
     </header>
 
     <!-- Hero Section (Pantalla de Bienvenida Limpia) -->
-    <section id="home" class="hero tab-section mobile-visible">
+    <section id="home" class="hero tab-section section-visible">
         <div class="hero-inner">
             <span class="hero-tag" data-i18n="hero_tag">Artes Visuales Contemporáneas y Estudios Conceptuales</span>
             <h1 class="hero-title" data-i18n="artist_title_hero">Dra. Semin Cacho</h1>
             <p class="hero-subtitle" data-i18n="hero_subtitle">Explorando estructuras narrativas a través de la pintura, la escultura y el arte interdisciplinario.</p>
-            <a onclick="showMobileSection('exhibition')" class="hero-scroll-link">
+            <a onclick="showSection('exhibition')" class="hero-scroll-link">
                 <span data-i18n="hero_explore">Explorar Galería</span>
                 <div class="scroll-arrow">↓</div>
             </a>
@@ -952,7 +964,7 @@
         <p class="copyright" data-i18n="copyright_text">&copy; 2026 Dra. Semin Cacho. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Multilingual Engine Script & Mobile Single-Section View Handler -->
+    <!-- Multilingual Engine Script & Global Single-Section View Handler -->
     <script>
         const artworkData = {
             art1: {
@@ -1141,33 +1153,26 @@
             localStorage.setItem('preferred_lang', lang);
         }
 
-        /* Lógica limpia para móviles: oculta todo y muestra únicamente la sección requerida */
-        function showMobileSection(targetId) {
-            if (window.innerWidth <= 768) {
-                const sections = document.querySelectorAll('.tab-section');
-                const navBtns = document.querySelectorAll('.nav-links a');
+        /* Lógica limpia global (PC y Móvil): oculta todo y despliega sólo la sección solicitada */
+        function showSection(targetId) {
+            const sections = document.querySelectorAll('.tab-section');
+            const navBtns = document.querySelectorAll('.nav-links a');
 
-                sections.forEach(sec => sec.classList.remove('mobile-visible'));
-                navBtns.forEach(btn => btn.classList.remove('active-tab'));
+            sections.forEach(sec => sec.classList.remove('section-visible'));
+            navBtns.forEach(btn => btn.classList.remove('active-tab'));
 
-                const targetSec = document.getElementById(targetId);
-                if (targetSec) {
-                    targetSec.classList.add('mobile-visible');
-                }
-
-                navBtns.forEach(btn => {
-                    if (btn.getAttribute('data-tab') === targetId) {
-                        btn.classList.add('active-tab');
-                    }
-                });
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
+            const targetSec = document.getElementById(targetId);
+            if (targetSec) {
+                targetSec.classList.add('section-visible');
             }
+
+            navBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === targetId) {
+                    btn.classList.add('active-tab');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function resetZoom() {
@@ -1194,13 +1199,8 @@
             const savedLang = localStorage.getItem('preferred_lang') || 'es';
             setLanguage(savedLang);
 
-            // Responsive initial state check for Mobile
-            if (window.innerWidth <= 768) {
-                const sections = document.querySelectorAll('.tab-section');
-                sections.forEach(sec => sec.classList.remove('mobile-visible'));
-                const homeSec = document.getElementById('home');
-                if (homeSec) homeSec.classList.add('mobile-visible');
-            }
+            // Estado inicial limpio en PC y Móvil
+            showSection('home');
 
             // Filtering
             const filterBtns = document.querySelectorAll('.filter-btn');
