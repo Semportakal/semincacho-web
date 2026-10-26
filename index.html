@@ -71,6 +71,7 @@
 
         .logo a {
             text-decoration: none;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -659,14 +660,14 @@
             width: 100%;
         }
 
-        /* Mobile Responsive & Tab Navigation (App Experience) */
+        /* Mobile Exclusive Clean View (App-Style) */
         @media (max-width: 768px) {
             .navbar {
                 position: sticky;
                 top: 0;
                 flex-direction: column;
                 gap: 0.8rem;
-                padding: 1rem 5%;
+                padding: 1.2rem 5%;
             }
 
             .nav-links {
@@ -677,8 +678,8 @@
 
             .nav-links a {
                 font-size: 0.7rem;
-                padding: 4px 8px;
-                background: rgba(0,0,0,0.03);
+                padding: 6px 12px;
+                background: rgba(0,0,0,0.04);
                 border-radius: 4px;
             }
 
@@ -694,18 +695,19 @@
                 margin-top: 0.2rem;
             }
 
-            /* Ocultar secciones dinámicamente en móvil */
+            /* Ocultar todas las secciones dinámicamente en móvil excepto la activa */
             .tab-section {
-                display: none;
+                display: none !important;
             }
 
-            .tab-section.active-section {
-                display: block;
+            .tab-section.mobile-visible {
+                display: block !important;
             }
 
             .hero {
-                min-height: 60vh;
-                padding: 2rem 5%;
+                min-height: 70vh;
+                padding: 3rem 5%;
+                justify-content: center;
             }
 
             .section {
@@ -779,13 +781,13 @@
     <!-- Header / Navigation -->
     <header class="navbar">
         <div class="logo">
-            <a href="#home" onclick="switchMobileTab('home')"><span class="brand-title">SEMIN CACHO</span> <span class="brand-sub">ART STUDIO</span></a>
+            <a onclick="showMobileSection('home')"><span class="brand-title">SEMIN CACHO</span> <span class="brand-sub">ART STUDIO</span></a>
         </div>
         <nav class="nav-links">
-            <a onclick="switchMobileTab('exhibition')" class="nav-btn active-tab" data-tab="exhibition" data-i18n="nav_exhibits">Obras</a>
-            <a onclick="switchMobileTab('statement')" class="nav-btn" data-tab="statement" data-i18n="nav_statement">Manifiesto</a>
-            <a onclick="switchMobileTab('about')" class="nav-btn" data-tab="about" data-i18n="nav_about">Sobre la Artista</a>
-            <a onclick="switchMobileTab('inquire')" class="nav-btn nav-highlight" data-tab="inquire" data-i18n="nav_inquire">Contacto</a>
+            <a onclick="showMobileSection('exhibition')" class="nav-btn" data-tab="exhibition" data-i18n="nav_exhibits">Obras</a>
+            <a onclick="showMobileSection('statement')" class="nav-btn" data-tab="statement" data-i18n="nav_statement">Manifiesto</a>
+            <a onclick="showMobileSection('about')" class="nav-btn" data-tab="about" data-i18n="nav_about">Sobre la Artista</a>
+            <a onclick="showMobileSection('inquire')" class="nav-btn nav-highlight" data-tab="inquire" data-i18n="nav_inquire">Contacto</a>
             
             <!-- Selector de Idioma TRILINGÜE -->
             <div class="lang-switch">
@@ -798,13 +800,13 @@
         </nav>
     </header>
 
-    <!-- Hero Section (Inicio) -->
-    <section id="home" class="hero tab-section active-section">
+    <!-- Hero Section (Pantalla de Bienvenida Limpia) -->
+    <section id="home" class="hero tab-section mobile-visible">
         <div class="hero-inner">
             <span class="hero-tag" data-i18n="hero_tag">Artes Visuales Contemporáneas y Estudios Conceptuales</span>
             <h1 class="hero-title" data-i18n="artist_title_hero">Dra. Semin Cacho</h1>
             <p class="hero-subtitle" data-i18n="hero_subtitle">Explorando estructuras narrativas a través de la pintura, la escultura y el arte interdisciplinario.</p>
-            <a onclick="switchMobileTab('exhibition')" class="hero-scroll-link">
+            <a onclick="showMobileSection('exhibition')" class="hero-scroll-link">
                 <span data-i18n="hero_explore">Explorar Galería</span>
                 <div class="scroll-arrow">↓</div>
             </a>
@@ -812,7 +814,7 @@
     </section>
 
     <!-- Gallery Grid Section (Obras) -->
-    <section id="exhibition" class="section tab-section active-section">
+    <section id="exhibition" class="section tab-section">
         <div class="section-header">
             <h2 class="section-title" data-i18n="gallery_title">Obras Seleccionadas</h2>
             <div class="filter-bar">
@@ -869,7 +871,7 @@
     </section>
 
     <!-- Curatorial Statement Banner (Manifiesto) -->
-    <section id="statement" class="quote-banner tab-section active-section">
+    <section id="statement" class="quote-banner tab-section">
         <div class="quote-container">
             <span class="quote-symbol">“</span>
             <blockquote data-i18n="quote_text">
@@ -880,7 +882,7 @@
     </section>
 
     <!-- About Section (Sobre la Artista) -->
-    <section id="about" class="section bg-editorial tab-section active-section">
+    <section id="about" class="section bg-editorial tab-section">
         <div class="editorial-grid">
             <div class="editorial-media">
                 <div class="portrait-frame">
@@ -909,7 +911,7 @@
     </section>
 
     <!-- Inquiry Room Section (Contacto) -->
-    <section id="inquire" class="section gallery-inquiry tab-section active-section">
+    <section id="inquire" class="section gallery-inquiry tab-section">
         <div class="inquiry-box">
             <h2 data-i18n="inquiry_title">Adquisiciones y Consultas del Estudio</h2>
             <p data-i18n="inquiry_desc">Proyectos especiales, disponibilidad de obras originales y consultas de exhibición se gestionan directamente con el estudio.</p>
@@ -950,7 +952,7 @@
         <p class="copyright" data-i18n="copyright_text">&copy; 2026 Dra. Semin Cacho. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Multilingual Engine Script & Mobile Tab Navigation -->
+    <!-- Multilingual Engine Script & Mobile Single-Section View Handler -->
     <script>
         const artworkData = {
             art1: {
@@ -1139,30 +1141,23 @@
             localStorage.setItem('preferred_lang', lang);
         }
 
-        /* Lógica para alternar pestañas en versión móvil sin romper el scroll de PC */
-        function switchMobileTab(targetId) {
+        /* Lógica limpia para móviles: oculta todo y muestra únicamente la sección requerida */
+        function showMobileSection(targetId) {
             if (window.innerWidth <= 768) {
                 const sections = document.querySelectorAll('.tab-section');
                 const navBtns = document.querySelectorAll('.nav-links a');
 
-                sections.forEach(sec => {
-                    if (targetId === 'home') {
-                        sec.classList.add('active-section');
-                    } else {
-                        sec.classList.remove('active-section');
-                    }
-                });
+                sections.forEach(sec => sec.classList.remove('mobile-visible'));
+                navBtns.forEach(btn => btn.classList.remove('active-tab'));
 
-                if (targetId !== 'home') {
-                    const activeSec = document.getElementById(targetId);
-                    if (activeSec) activeSec.classList.add('active-section');
+                const targetSec = document.getElementById(targetId);
+                if (targetSec) {
+                    targetSec.classList.add('mobile-visible');
                 }
 
                 navBtns.forEach(btn => {
                     if (btn.getAttribute('data-tab') === targetId) {
                         btn.classList.add('active-tab');
-                    } else {
-                        btn.classList.remove('active-tab');
                     }
                 });
 
@@ -1198,6 +1193,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferred_lang') || 'es';
             setLanguage(savedLang);
+
+            // Responsive initial state check for Mobile
+            if (window.innerWidth <= 768) {
+                const sections = document.querySelectorAll('.tab-section');
+                sections.forEach(sec => sec.classList.remove('mobile-visible'));
+                const homeSec = document.getElementById('home');
+                if (homeSec) homeSec.classList.add('mobile-visible');
+            }
 
             // Filtering
             const filterBtns = document.querySelectorAll('.filter-btn');
